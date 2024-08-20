@@ -10,11 +10,13 @@ const customIcon = new L.Icon({
     // popupAnchor: [0, -38], // Adjust popup position
 });
 
-export default function Map() {
+export default function Map(props) {
+  const {data} = props
+  console.log('MAPDATA', data)
   return (
     <>
       <MapContainer
-        center={[51.505, -0.09]}
+        center={[data?.location?.lat, data?.location?.lng]}
         zoom={13}
         style={{ height: "100vh", width: "100%", outline: 'red'}}
       >
@@ -22,7 +24,7 @@ export default function Map() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        <Marker position={[51.505, -0.09]} icon={customIcon}>
+        <Marker position={[data?.location?.lat, data?.location?.lng]} icon={customIcon}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>

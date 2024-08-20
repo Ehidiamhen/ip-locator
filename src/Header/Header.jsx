@@ -1,7 +1,8 @@
 import "./Header.css";
 import arrow from "../assets/icon-arrow.svg";
 
-export default function Header() {
+export default function Header(props) {
+  const {data} = props
   return (
     <div className="header rubik-fonts">
       <h1>IP Address Tracker</h1>
@@ -18,19 +19,19 @@ export default function Header() {
       <div className="info">
         <p>
           <span>IP ADDRESS</span>
-          <span>192.212.174.101</span>
+          <span>{data?.ip}</span>
         </p>
         <p>
           <span>LOCATION</span>
-          <span>Brooklyn, NY 10001</span>
+          <span>{data?.location?.city}, {data?.location?.region}, {data?.location?.country}</span>
         </p>
         <p>
           <span>TIMEZONE</span>
-          <span>UTC -05:00</span>
+          <span>{data?.location?.timezone}</span>
         </p>
         <p>
           <span>ISP</span>
-          <span>SpaceX Starlink</span>
+          <span>{data?.isp}</span>
         </p>
       </div>
     </div>
