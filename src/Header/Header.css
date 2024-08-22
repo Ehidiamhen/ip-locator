@@ -14,10 +14,12 @@
     color: white;
     font-size: 28px;
     padding-top: 1rem;
+    margin: 0 0 1.2rem 0;
 }
 
 input {
     background-color: white;
+    color: black;
     width: 30%;
     height: 40px;
     font-size: 18px;

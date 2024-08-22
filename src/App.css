@@ -29,7 +29,7 @@
 }
 
 .loadingState i {
-  opacity: 0.2;
+  opacity: 0.3;
   font-size: 3rem;
   animation: spin 1s linear infinite;
 }

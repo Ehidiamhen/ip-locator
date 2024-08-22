@@ -5,17 +5,29 @@ import Header from './Header/Header'
 
 function App() {
   const [data, setData] = useState(null)
+  const [ipAddress, setIpAddress] = useState('')
+
+  const handleSubmit = (term) => {
+    setIpAddress(term)
+    console.log(ipAddress)
+    console.log(term)
+  }
 
   useEffect(() => {
     async function getIPInfo() {
       const KEY = import.meta.env.VITE_IPIFY_KEY
 
       try {
-        const res = await fetch('https://api.ipify.org')
-        const ip = await res.text()
-        console.log(ip)
+        // const res = await fetch('https://api.ipify.org')
+        // const ip = await res.text()
+        // setIpAddress(ip)
+        // console.log(ip)
+        // console.log(ipAddress)
 
-        const url =`https://geo.ipify.org/api/v2/country,city?apiKey=${KEY}&ipAddress=${ip}`
+        // handleSubmit()
+        // setIpAddress()
+
+        const url =`https://api.ipgeolocation.io/ipgeo?apiKey=${KEY}` + `&ip=${ipAddress}`
         const response = await fetch(url)
         const ipData = await response.json()
         setData(ipData)
@@ -28,19 +40,22 @@ function App() {
 
 
     getIPInfo()
-  }, [])
+  }, [ipAddress])
 
   return (
     <>
-      <Header data={data} />
-      {data?
-       <Map data={data} /> :
-       <div className="loadingState">
-         <i className="fa-solid fa-gear"></i>
-       </div>
-      }
+      {data ? (
+        <>
+          <Header data={data} onSubmit={handleSubmit} />
+          <Map data={data} />
+        </>
+      ) : (
+        <div className="loadingState">
+          <i className="fa-solid fa-gear"></i>
+        </div>
+      )}
     </>
-  )
+  );
 }
 
 export default App
